@@ -1,8 +1,16 @@
 import gameOfLife, { calculateCellValue } from "./game-of-life";
 
 /*
-grey cells represented in tests by 'false'
-yellow cells as 'true'
+
+RULES OF THE GAME:
+1. If a grey square touches 3 yellow squares it turns yellow.
+2. If a yellow square touches less than 2 other yellow squares, it turns grey.
+3. If a yellow square touches more than 3 yellow squares, it turns grey.
+4. Otherwise, squares maintain their colour.
+
+Grey cells represented in tests by 'false';
+Yellow cells as 'true';
+
 */
 
 describe("game of life - grey cell tests", () => {
@@ -114,5 +122,14 @@ describe("game of life - board tests", () => {
             [false, false, true, false]
         ]
         expect(gameOfLife(board)).toStrictEqual([[false, false, false, false], [false, false, false, false], [false, false, false, false]])
+    });
+
+    it("receives a board of containing a yellow cell with 4 adjoining cells, returns correct board", () => {
+        const board = [
+            [false, false, true],
+            [true, true, false],
+            [true, true, false]
+        ]
+        expect(gameOfLife(board)).toStrictEqual([[false, true, false], [true, false, true], [true, true, false]])
     });
 });

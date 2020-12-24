@@ -17,9 +17,10 @@ export const gameOfLife = board => {
     // create a deep clone of the board
     const newBoard = JSON.parse(JSON.stringify(board));
 
-    // loop through each 
+    // loop through each cell of the board
     for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board[i].length; j++) {
+            
             const value = board[i][j];
             let adjacentCellsValue = 0;
 
@@ -50,6 +51,7 @@ export const gameOfLife = board => {
                     adjacentCellsValue++
                 }
             }
+
             // if there is a cell left
             if (j > 0) {
                 // check each cell for truthiness
@@ -65,6 +67,7 @@ export const gameOfLife = board => {
                     adjacentCellsValue++
                 }
             }
+
             const newValue = calculateCellValue(value, adjacentCellsValue);
             newBoard[i][j] = newValue;
         }
