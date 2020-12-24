@@ -1,4 +1,4 @@
-export const cellCheck = (value, adjacentCells) => {
+export const calculateCellValue = (value, adjacentCells) => {
     if (value) {
         switch (adjacentCells) {
             case 2: return true;
@@ -9,14 +9,15 @@ export const cellCheck = (value, adjacentCells) => {
     if (adjacentCells === 3) {
         return true;
     }
-    return value;
+    return false;
 }
 
-const gameOfLife = board => {
+export const gameOfLife = board => {
 
     // create a deep clone of the board
     const newBoard = JSON.parse(JSON.stringify(board));
 
+    // loop through each 
     for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board[i].length; j++) {
             const value = board[i][j];
@@ -64,15 +65,10 @@ const gameOfLife = board => {
                     adjacentCellsValue++
                 }
             }
-            
-            const newValue = cellCheck(value, adjacentCellsValue);
+            const newValue = calculateCellValue(value, adjacentCellsValue);
             newBoard[i][j] = newValue;
-            
         }
     }
-    console.log("board", board)
-    console.log("newBoard", newBoard)
-
     return newBoard;
 }
 
